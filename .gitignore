@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+logs/
+config/gesture_config.json
+config/latest_frame.jpg
+config/runtime_state.json
+config/visualizer.pid
