@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f5f7fa">
+    <meta name="description" content="OPENGESTURE convierte la camara del portatil en control por gestos, cara, voz y analisis corporal en red local.">
+    <meta property="og:title" content="OPENGESTURE">
+    <meta property="og:description" content="Control IA por gestos, cara, voz y modo BODY desde tu red local.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/opengesture-preview.svg">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="OPENGESTURE">
+    <title>OPENGESTURE</title>
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/opengesture-icon.svg">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="brand-bar">
+        <div class="brand-lockup">
+          <img src="/opengesture-icon.svg" alt="" class="brand-mark">
+          <div>
+            <h1>OPENGESTURE</h1>
+            <p>Vision control studio</p>
+          </div>
+        </div>
+        <div class="status-pill" id="runtimeStatus">Cargando</div>
+      </header>
+
+      <section class="hero-band">
+        <div>
+          <p class="eyebrow">Laptop vision · LAN mobile · No login</p>
+          <h2>Gestos, cara, voz y BODY en directo.</h2>
+        </div>
+        <div class="quick-actions">
+          <button id="toggleVisualizer">Camara</button>
+          <button id="toggleControl" class="soft">Control</button>
+        </div>
+      </section>
+
+      <section class="mode-card">
+        <label>
+          Modo de vision
+          <select id="visionMode">
+            <option value="GESTURE">GESTURE · manos y pantalla</option>
+            <option value="FACE">FACE · cara, ojos y sonrisa</option>
+            <option value="BODY">BODY · cuerpo y trayectorias</option>
+          </select>
+        </label>
+        <label>
+          Perfil
+          <select id="profileSelect">
+            <option value="navigation">Navegacion</option>
+            <option value="presentation">Presentacion</option>
+            <option value="media">Multimedia</option>
+            <option value="air_mouse">Mouse aereo</option>
+          </select>
+        </label>
+        <button id="saveButton">Guardar</button>
+      </section>
+
+      <section class="metrics-grid">
+        <article>
+          <span>Gesto</span>
+          <strong id="metricGesture">NO_HAND</strong>
+        </article>
+        <article>
+          <span>Accion</span>
+          <strong id="metricAction">waiting</strong>
+        </article>
+        <article>
+          <span>Cara</span>
+          <strong id="metricFace">sin cara</strong>
+        </article>
+        <article>
+          <span>BODY</span>
+          <strong id="metricBody">idle</strong>
+        </article>
+      </section>
+
+      <section class="live-layout">
+        <article class="surface camera-panel">
+          <div class="panel-head">
+            <div>
+              <h3>Vision live</h3>
+              <p>La misma imagen tambien se abre en ventana aparte en el PC.</p>
+            </div>
+            <span id="metricFps">0 FPS</span>
+          </div>
+          <div class="camera-box">
+            <img id="cameraPreview" alt="Vista de camara">
+          </div>
+        </article>
+
+        <article class="surface pad-panel">
+          <div class="panel-head">
+            <div>
+              <h3>Touchpad</h3>
+              <p>Arrastra desde el movil para mover el cursor.</p>
+            </div>
+          </div>
+          <div id="touchPad" class="touch-pad"><span></span></div>
+          <div class="button-row">
+            <button id="padClick" class="soft">Click</button>
+            <button id="padRightClick" class="soft">Derecho</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="surface">
+        <div class="panel-head">
+          <div>
+            <h3>Voz</h3>
+            <p>Usa el micro del dispositivo que abre esta app: PC o movil en LAN.</p>
+          </div>
+          <button id="voiceButton" class="soft">Escuchar</button>
+        </div>
+        <p id="voiceStatus" class="readout">Comandos: activar control, apagar control, abrir camara, cerrar camara, modo gestos, modo cara, modo cuerpo.</p>
+      </section>
+
+      <section class="settings-grid">
+        <article class="surface">
+          <h3>Control</h3>
+          <div class="toggle-list">
+            <label><input id="featureScroll" type="checkbox"> Scroll</label>
+            <label><input id="featureCursor" type="checkbox"> Cursor</label>
+            <label><input id="featureZoom" type="checkbox"> Zoom</label>
+            <label><input id="featureAirMouse" type="checkbox"> Mouse aereo</label>
+            <label><input id="featureDrag" type="checkbox"> Drag pinza</label>
+            <label><input id="featureFace" type="checkbox"> Face overlay</label>
+            <label><input id="featureBody" type="checkbox"> Body overlay</label>
+          </div>
+        </article>
+
+        <article class="surface">
+          <h3>Velocidad</h3>
+          <label>Scroll <input id="scrollSpeed" type="range" min="0" max="6000" step="12"><strong id="scrollSpeedValue"></strong></label>
+          <label>Suavidad <input id="scrollStep" type="range" min="1" max="240" step="1"><strong id="scrollStepValue"></strong></label>
+          <label>Cursor <input id="cursorSpeed" type="range" min="0" max="1000" step="5"><strong id="cursorSpeedValue"></strong></label>
+          <label>Trayectoria manos <input id="trajectorySeconds" type="range" min="0.5" max="15" step="0.5"><strong id="trajectorySecondsValue"></strong></label>
+        </article>
+
+        <article class="surface">
+          <h3>FACE / BODY</h3>
+          <label>Parpadeo <input id="faceBlink" type="range" min="0.006" max="0.06" step="0.001"><strong id="faceBlinkValue"></strong></label>
+          <label>Sonrisa <input id="faceSmile" type="range" min="1.4" max="8" step="0.1"><strong id="faceSmileValue"></strong></label>
+          <label>Trayectoria BODY <input id="bodySeconds" type="range" min="1" max="20" step="0.5"><strong id="bodySecondsValue"></strong></label>
+        </article>
+      </section>
+
+      <section class="surface">
+        <h3>Gestos y acciones</h3>
+        <div class="actions-grid">
+          <label>Mano arriba<select id="actionOpenUp"></select></label>
+          <label>Mano abajo<select id="actionOpenDown"></select></label>
+          <label>Mano izquierda<select id="actionOpenLeft"></select></label>
+          <label>Mano derecha<select id="actionOpenRight"></select></label>
+          <label>Pinza<select id="actionPinch"></select></label>
+          <label>Ambas pinzas<select id="actionBothPinch"></select></label>
+          <label>Punio cerca<select id="actionFistCloser"></select></label>
+          <label>Punio lejos<select id="actionFistAway"></select></label>
+          <label>Dos manos lejos<select id="actionTwoHandsApart"></select></label>
+          <label>Dos manos cerca<select id="actionTwoHandsTogether"></select></label>
+          <label>Una arriba otra abajo<select id="actionSplitVertical"></select></label>
+        </div>
+      </section>
+
+      <section class="surface">
+        <h3>Sistema</h3>
+        <div class="system-grid">
+          <label>Abrir/cerrar camara <input id="cameraHotkey" maxlength="5" autocomplete="off"></label>
+          <label>Activar control <input id="controlHotkey" maxlength="5" autocomplete="off"></label>
+          <label>Camara <input id="cameraIndex" type="number" min="0" max="8"></label>
+          <label><input id="mirror" type="checkbox"> Espejo</label>
+          <label><input id="controlStart" type="checkbox"> Control al abrir</label>
+        </div>
+        <div class="button-row calibration-row">
+          <button class="soft calibration" data-label="open">Calibrar abierta</button>
+          <button class="soft calibration" data-label="fist">Calibrar punio</button>
+          <button class="soft calibration" data-label="pinch">Calibrar pinza</button>
+        </div>
+      </section>
+
+      <p class="save-state" id="saveStatus">Listo</p>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
