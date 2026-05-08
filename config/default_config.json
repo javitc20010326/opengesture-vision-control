@@ -1,0 +1,125 @@
+{
+  "app_name": "OPENGESTURE",
+  "vision_mode": "GESTURE",
+  "camera_hotkey": "E+R",
+  "control_hotkey": "D+F",
+  "camera": 0,
+  "mirror": true,
+  "control_enabled_on_start": false,
+  "features": {
+    "scroll": true,
+    "zoom": true,
+    "cursor": true,
+    "air_mouse": false,
+    "drag": true,
+    "voice": true,
+    "face": true,
+    "body": true
+  },
+  "current_profile": "navigation",
+  "trajectory": {
+    "seconds": 4,
+    "finger_trails": true,
+    "hand_trails": true,
+    "body_trails": true
+  },
+  "face": {
+    "enabled": true,
+    "draw_mesh": true,
+    "blink_threshold": 0.018,
+    "smile_threshold": 3.2,
+    "gaze_dead_zone": 0.08,
+    "movement_smoothing": 0.22
+  },
+  "body": {
+    "enabled": true,
+    "draw_pose": true,
+    "draw_digital_twin": true,
+    "trajectory_seconds": 6,
+    "center_smoothing": 0.2
+  },
+  "voice": {
+    "language": "es-ES",
+    "device_hint": "auto"
+  },
+  "air_mouse": {
+    "smoothing": 0.25,
+    "dead_zone": 0.04
+  },
+  "scroll": {
+    "speed": 2112,
+    "max_step": 12
+  },
+  "cursor": {
+    "speed": 45,
+    "max_step": 28
+  },
+  "zoom": {
+    "threshold": 0.02,
+    "cooldown": 0.25
+  },
+  "two_hands": {
+    "distance_threshold": 0.015
+  },
+  "gesture": {
+    "min_detection_confidence": 0.65,
+    "min_tracking_confidence": 0.6,
+    "stable_frames": 4
+  },
+  "actions": {
+    "open_up": "scroll_up",
+    "open_down": "scroll_down",
+    "open_left": "cursor_left",
+    "open_right": "cursor_right",
+    "open_up_left": "cursor_up_left",
+    "open_up_right": "cursor_up_right",
+    "open_down_left": "cursor_down_left",
+    "open_down_right": "cursor_down_right",
+    "pinch": "click",
+    "both_pinch": "double_click",
+    "fist_closer": "zoom_in",
+    "fist_away": "zoom_out",
+    "two_hands": "show_desktop",
+    "two_hands_apart": "zoom_in",
+    "two_hands_together": "zoom_out",
+    "split_vertical": "show_desktop"
+  },
+  "profiles": {
+    "navigation": {
+      "actions": {
+        "open_up": "scroll_up",
+        "open_down": "scroll_down",
+        "open_left": "cursor_left",
+        "open_right": "cursor_right",
+        "pinch": "click"
+      }
+    },
+    "presentation": {
+      "actions": {
+        "open_left": "prev_slide",
+        "open_right": "next_slide",
+        "open_up": "show_desktop",
+        "pinch": "click"
+      }
+    },
+    "media": {
+      "actions": {
+        "open_up": "volume_up",
+        "open_down": "volume_down",
+        "open_left": "media_prev",
+        "open_right": "media_next",
+        "pinch": "play_pause",
+        "both_pinch": "mute"
+      }
+    },
+    "air_mouse": {
+      "features": {
+        "air_mouse": true,
+        "drag": true
+      },
+      "actions": {
+        "pinch": "drag"
+      }
+    }
+  }
+}
