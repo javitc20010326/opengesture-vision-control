@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f5f7fa"/>
+  <rect x="72" y="72" width="1056" height="486" rx="28" fill="#ffffff" opacity=".82"/>
+  <path d="M323 384c61 131 239 158 350 65 103-86 109-251 14-345-98-96-262-84-346 26" fill="none" stroke="#2f6f65" stroke-width="42" stroke-linecap="round"/>
+  <path d="M305 151c113-95 283-87 385 20 81 85 99 211 46 313" fill="none" stroke="#b65f42" stroke-width="28" stroke-linecap="round"/>
+  <circle cx="544" cy="312" r="72" fill="#202124"/>
+  <circle cx="544" cy="312" r="28" fill="#f5f7fa"/>
+  <text x="710" y="272" fill="#202124" font-family="Segoe Script, Brush Script MT, cursive" font-size="86" font-weight="800">OPENGESTURE</text>
+  <text x="718" y="330" fill="#74706b" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">Vision control studio</text>
+</svg>
